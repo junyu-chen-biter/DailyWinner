@@ -1,0 +1,45 @@
+/// <reference types="vite-plugin-electron/electron-env" />
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    /**
+     * The built directory structure
+     *
+     * ```tree
+     * ├─┬─┬ dist
+     * │ │ └── index.html
+     * │ │
+     * │ ├─┬ dist-electron
+     * │ │ ├── main.js
+     * │ │ └── preload.js
+     * │
+     * ```
+     */
+    APP_ROOT: string
+    /** /dist/ or /public/ */
+    VITE_PUBLIC: string
+  }
+}
+
+// Used in Renderer process, expose in `preload.ts`
+interface Window {
+  ipcRenderer: import('electron').IpcRenderer
+}
+
+declare module 'auto-launch' {
+  interface AutoLaunchOptions {
+    name: string
+    path?: string
+    isHidden?: boolean
+    mac?: {
+      useLaunchAgent?: boolean
+    }
+  }
+
+  export default class AutoLaunch {
+    constructor(options: AutoLaunchOptions)
+    enable(): Promise<void>
+    disable(): Promise<void>
+    isEnabled(): Promise<boolean>
+  }
+}
