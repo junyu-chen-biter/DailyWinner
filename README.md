@@ -22,6 +22,7 @@
 ## 🚀 快速开始
 
 ### 1. 安装依赖
+要先安装 Node.js 和 npm（或 yarn）。
 
 ```bash
 npm install
@@ -40,6 +41,7 @@ yarn dev
 ### 3. 构建应用
 
 构建生产环境的安装包：
+需要管理员权限
 
 ```bash
 npm run build
@@ -56,6 +58,4 @@ yarn build
 - `dist-electron/` - Electron 编译输出
 - `release/` - 打包后的安装程序
 
-## 📄 License
-
-MIT
+作者：Marquez——chen

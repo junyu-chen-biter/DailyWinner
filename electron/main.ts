@@ -1,11 +1,9 @@
 import { app, BrowserWindow, ipcMain, Tray, Menu, screen } from "electron";
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import Store from "electron-store";
 import AutoLaunch from "auto-launch";
 
-const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -92,7 +90,7 @@ app.whenReady().then(() => {
     return store.get("tasks", []);
   });
 
-  ipcMain.on("update-tasks", (event, tasks) => {
+  ipcMain.on("update-tasks", (_event, tasks) => {
     store.set("tasks", tasks);
   });
 
@@ -104,7 +102,7 @@ app.whenReady().then(() => {
     return autoLauncher.isEnabled();
   });
 
-  ipcMain.on("toggle-auto-launch", (event, enable) => {
+  ipcMain.on("toggle-auto-launch", (_event, enable) => {
     const autoLauncher = new AutoLaunch({
       name: "Daily Habit Tracker",
       path: app.getPath("exe"),
